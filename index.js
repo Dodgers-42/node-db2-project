@@ -1,21 +1,20 @@
-// const express = require("express")
-// // const carsRouter = require("./data/carRouter")
+const express = require('express')
+const dealerRouter = require('./dealer/dealer-router')
 
-// const server = express()
-// const port = 4000
+const server = express()
+const port = process.env.PORT || 5000
 
-// server.use(express.json())
-// server.use("/", carRouter)
+server.use(express.json())
 
-// server.use((err, req, res, next) => {
-//     console.log(err)
-//     res.status(500).json({
-//         message: "Something went wrong",
-//     })
-// })
+server.use("/car-dealer", dealerRouter)
 
+server.use((err, req, res, next) => {
+	console.log(err)
+	res.status(500).json({
+		message: "Something went wrong",
+	})
+})
 
-// server.listen(port, () =>{
-//     console.log(`Server running at http://localhost:${port}`)
-    
-// })
+server.listen(port, () => {
+	console.log(`Running at http://localhost:${port}`)
+})
